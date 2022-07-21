@@ -1,9 +1,15 @@
 package org.exercise;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Objects;
+
+import static java.lang.String.format;
 
 import java.util.Objects;
 
@@ -13,15 +19,16 @@ import static java.lang.String.format;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private final String firstName;
-    private final String lastName;
+    @JsonProperty private Long id;
+    @JsonProperty private final String firstName;
+    @JsonProperty private final String lastName;
 
     public Employee(String firstName, String lastName) {
         this(null, firstName, lastName);
     }
 
-    public Employee(Long id, String firstName, String lastName) {
+    @JsonCreator
+    public Employee(@JsonProperty("id") Long id, @JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
