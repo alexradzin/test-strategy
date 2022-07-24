@@ -20,8 +20,12 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty private Long id;
-    @JsonProperty private final String firstName;
-    @JsonProperty private final String lastName;
+    @JsonProperty private String firstName;
+    @JsonProperty private String lastName;
+
+    private Employee() {
+        // empty; needed for Hibernate
+    }
 
     public Employee(String firstName, String lastName) {
         this(null, firstName, lastName);
