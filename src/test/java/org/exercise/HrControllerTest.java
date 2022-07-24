@@ -25,6 +25,12 @@ public class HrControllerTest {
     }
 
     @Test
+    public void subordinate() {
+        controller.subordinate(1, 2);
+        verify(hr).subordinate(1, 2);
+    }
+
+    @Test
     public void list() {
         List<Employee> list = Arrays.asList(new Employee("John", "Lennon"), new Employee("Paul", "McCartney"));
         when(hr.list()).thenReturn(list);

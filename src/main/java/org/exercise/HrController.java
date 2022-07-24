@@ -39,6 +39,17 @@ public class HrController {
     }
 
     /**
+     * curl -X POST http://localhost:8080/test/api/v1/subordination/1/2 -H 'Content-Type: application/json'
+     * @param managerId - manager ID
+     * @param employeeId - employee ID
+     */
+    @PostMapping(path = "/test/api/v1/subordination/{managerId}/{employeeId}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void subordinate(@PathVariable("managerId") long managerId, @PathVariable("employeeId") long employeeId) {
+        hr.subordinate(managerId, employeeId);
+    }
+
+    /**
      * curl http://localhost:8080/test/api/v1/employees
      * @return all employees
      */

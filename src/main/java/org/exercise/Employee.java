@@ -7,10 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Objects;
-
-import static java.lang.String.format;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 import java.util.Objects;
 
 import static java.lang.String.format;
@@ -22,6 +22,13 @@ public class Employee {
     @JsonProperty private Long id;
     @JsonProperty private String firstName;
     @JsonProperty private String lastName;
+
+    @ManyToOne
+    @JoinColumn(name="manager_id")
+    @JsonProperty private Employee manager;
+
+    @OneToMany(mappedBy="manager")
+    @JsonProperty private List<Employee> subordinates;
 
     private Employee() {
         // empty; needed for Hibernate
@@ -40,6 +47,26 @@ public class Employee {
 
     public Long getId() {
         return id;
+    }
+
+    public Employee getManager() {
+        return manager;
+    }
+
+    public List<Employee> getSubordinates() {
+        return subordinates;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setManager(Employee manager) {
+        this.manager = manager;
+    }
+
+    public void setSubordinates(List<Employee> subordinates) {
+        this.subordinates = subordinates;
     }
 
     @Override
